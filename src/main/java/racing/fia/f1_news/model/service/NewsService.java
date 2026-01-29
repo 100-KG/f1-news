@@ -34,7 +34,28 @@ public class NewsService {
         logger.info("Starting to insert news to database: {}", news.getTitle());
         try{
             newsrepo.save(news);
-            logger.info("Inserting news successfully with id: {}", news.getId());
+            logger.info("News  successfully with id: {}", news.getId());
+        }catch(Exception e){
+            logger.error("Fatal error in inserting news to database: ", e);
+            throw e;
+        }
+    }
+    
+    public void removeNews(News news){
+        logger.info("Starting to remove news from database: {}", news.getTitle());
+        try{
+            newsrepo.delete(news);
+            logger.info("News removed successful");
+        }catch(Exception e){
+            logger.error("Fatal error in removing news: {}", news.getTitle());
+        }
+    }
+    
+    public void updateNews(News news){
+        logger.info("Starting to update news to database: {}", news.getTitle());
+        try{
+            newsrepo.save(news);
+            logger.info("News updated successfully with id: {}", news.getId());
         }catch(Exception e){
             logger.error("Fatal error in inserting news to database: ", e);
             throw e;

@@ -39,5 +39,7 @@ public class NewsController {
 //        return "news-detail";
 //    }
     @RequestMapping(value = "/searchNews")
-    public String search(@RequestParam())
+    public String search(@RequestParam("1231") String hehe){
+        return "hehe";
+    }
 }
