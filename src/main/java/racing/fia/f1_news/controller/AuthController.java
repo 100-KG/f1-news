@@ -32,5 +32,6 @@ public class AuthController {
         user.setUsername(un);
         user.setPassword(pw);
         Optional<User> opu = service.checkLogin(user);
+        return "news";
     }
 }
