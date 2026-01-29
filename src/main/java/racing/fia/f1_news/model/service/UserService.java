@@ -26,21 +26,23 @@ public class UserService {
     @Autowired
     UserRepository repo;
     
-    public boolean checkLogin(User user){
+    public Optional<User> checkLogin(User user){
         logger.info("Starting check login for username: {}", user.getUsername());
+        User authUser = new User();
         try{
             Optional<User> opu = repo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             if(opu.isPresent()){
-                User loggedUser = opu.get();
-                logger.info("Welcom back: {}", loggedUser.getFullname());
+                authUser = opu.get();
+                logger.info("Welcom back: {}", authUser.getFullname());
             }
             else{
                 logger.warn("Invalid username or password!");
+                return null;
             }
         }catch(Exception e){
             logger.info("Fatal error in checking login: {}", e);
             throw e;
         }
-        return true;
+        return opu;
     }
 }

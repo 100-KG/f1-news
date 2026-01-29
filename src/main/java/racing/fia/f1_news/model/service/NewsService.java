@@ -11,10 +11,8 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import racing.fia.f1_news.model.repository.NewsRepoData;
 import racing.fia.f1_news.model.repository.NewsRepository;
 
 /**
@@ -28,7 +26,7 @@ public class NewsService {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Autowired
-    NewsRepoData newsrepo;
+    NewsRepository newsrepo;
     
     public void insertNews(News news){
         logger.info("Starting to insert news to database: {}", news.getTitle());

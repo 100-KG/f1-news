@@ -14,6 +14,6 @@ import racing.fia.f1_news.model.User;
  */
 public interface UserRepository extends JpaRepository<User, Integer> {
     
-    // Spring generates: SELECT * FROM users WHERE username = ? AND password = ?
+    // SQL: SELECT * FROM users WHERE username = ? AND password = ?
     Optional<User>findByUsernameAndPassword (String username, String password);
 }

@@ -24,7 +24,7 @@ public class NewsController {
     NewsService service;
     
     @RequestMapping(value = "/news")
-    public String callNewsPage(){
+    public String showNewsPage(){
         return "news";
     }
     

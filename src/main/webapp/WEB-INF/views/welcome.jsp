@@ -17,6 +17,16 @@
             <link rel="stylesheet" href="${pageContext.request.contextPath}/webjars/bootstrap/5.3.0/css/bootstrap.min.css">
         </head>
         <body>
+        <header>
+            <div>
+                <div>
+                    Icon :)
+                </div>
+                <div>
+                    <a href="login" class="btn btn-primary">Login</a>
+                </div>
+            </div>
+        </header>
             <div class="container mt-5">
                 <div class="card" style="width: 30rem">
                     <div class="card-body">
@@ -24,12 +34,11 @@
                         <a href="news" class="btn btn-primary">
                             View F1 News    
                         </a>    
-                        <a href="bootstrap-ref" class="btn btn-primary">View bootstrap-ref page</a>
                     </div>
                 </div>
                
             </div>
-
+            
         </body>
     </html>
 </f:view>

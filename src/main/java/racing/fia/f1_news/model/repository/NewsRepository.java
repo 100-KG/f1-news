@@ -1,24 +1,16 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package racing.fia.f1_news.model.repository;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import org.springframework.stereotype.Repository;
+import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 import racing.fia.f1_news.model.News;
-
 /**
  *
  * @author mottramkg
  */
-@Repository
-public class NewsRepository {
-    @PersistenceContext
-    EntityManager entityManager;
+public interface NewsRepository extends  JpaRepository<News, Integer> {
     
-    public News insertNews(News news){
-        return entityManager.merge(news);
-    }
+    List<News> findByTitleContainingIgnoreCase(String keyword);
 }
