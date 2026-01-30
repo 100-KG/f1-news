@@ -7,6 +7,7 @@ package racing.fia.f1_news.controller;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import racing.fia.f1_news.model.User;
@@ -27,11 +28,21 @@ public class AuthController {
     }
     
     @RequestMapping("checkLogin")
-    public String checkLoginWithUsername(@RequestParam("username, password") String un, String pw){
+    public String checkLoginReturnPage(@RequestParam("username, password") String un, String pw, Model model){
         User user = new User();
         user.setUsername(un);
         user.setPassword(pw);
-        Optional<User> opu = service.checkLogin(user);
-        return "news";
+        User u = service.checkLogin(user);
+        if(u == null){
+            return "login";
+        }else{
+            model.addAttribute("fullname", u.getFullname());
+            model.addAttribute("role", u.getRole());
+            if(model.getAttribute("role") == "admin"){
+                return "manage";
+            }else{
+                return "news";
+            }
+        }
     }
 }

@@ -25,19 +25,19 @@ public class News {
     private String title;
     private String description;
     private String content;
-    private Date dayCreated;
+    private String daycreated;
     private String author;
 
     public News() {
         
     }
     
-    public News(String title, String description, String content, Date dayCreated, String author) {
+    public News(String title, String description, String content, String daycreated, String author) {
         super();
         this.title = title;
         this.description = description;
         this.content = content;
-        this.dayCreated = dayCreated;
+        this.daycreated = daycreated;
         this.author = author;
     }
 
@@ -73,12 +73,12 @@ public class News {
         this.description = description;
     }
 
-    public Date getDayCreated() {
-        return dayCreated;
+    public String getDaycreated() {
+        return daycreated;
     }
 
-    public void setDayCreated(Date dayCreated) {
-        this.dayCreated = dayCreated;
+    public void setDaycreated(String daycreated) {
+        this.daycreated = daycreated;
     }
 
     public String getAuthor() {

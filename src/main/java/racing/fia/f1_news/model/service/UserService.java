@@ -26,7 +26,7 @@ public class UserService {
     @Autowired
     UserRepository repo;
     
-    public Optional<User> checkLogin(User user){
+    public User checkLogin(User user){
         logger.info("Starting check login for username: {}", user.getUsername());
         User authUser = new User();
         try{
@@ -34,6 +34,7 @@ public class UserService {
             if(opu.isPresent()){
                 authUser = opu.get();
                 logger.info("Welcom back: {}", authUser.getFullname());
+                
             }
             else{
                 logger.warn("Invalid username or password!");
@@ -43,6 +44,6 @@ public class UserService {
             logger.info("Fatal error in checking login: {}", e);
             throw e;
         }
-        return opu;
+        return authUser;
     }
 }
