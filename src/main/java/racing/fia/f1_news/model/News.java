@@ -88,6 +88,11 @@ public class News {
     public void setAuthor(String author) {
         this.author = author;
     }
+
+    @Override
+    public String toString() {
+        return "News{" + "id=" + id + ", title=" + title + ", description=" + description + ", content=" + content + ", daycreated=" + daycreated + ", author=" + author + '}';
+    }
     
     
 }

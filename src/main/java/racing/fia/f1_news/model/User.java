@@ -9,7 +9,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import org.springframework.stereotype.Component;
-
+import java.lang.String;
 /**
  *
  * @author motramkg
@@ -74,6 +74,11 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", fullname=" + fullname + ", username=" + username + ", password=" + password + ", role=" + role + '}';
     }
     
     

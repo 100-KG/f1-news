@@ -8,8 +8,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import jakarta.servlet.http.HttpSession;
 import racing.fia.f1_news.model.User;
 import racing.fia.f1_news.model.service.UserService;
 
@@ -21,28 +25,35 @@ import racing.fia.f1_news.model.service.UserService;
 public class AuthController {
     @Autowired
     UserService service;
-    
-    @RequestMapping("/login")
-    public String showLoginPage(){
+
+    @GetMapping("/login")
+    public String showLoginPage() {
         return "login";
     }
-    
-    @RequestMapping("checkLogin")
-    public String checkLoginReturnPage(@RequestParam("username, password") String un, String pw, Model model){
+
+    @PostMapping("/auth/checkLogin")
+    public String checkLoginReturnPage(@RequestParam("username") String un, @RequestParam("password") String pw,
+            HttpSession session, Model model) {
+
         User user = new User();
         user.setUsername(un);
         user.setPassword(pw);
-        User u = service.checkLogin(user);
-        if(u == null){
+
+        User authUser = service.checkLogin(user);
+
+        if (authUser == null) {
+            model.addAttribute("error", "Invalid username or password");
             return "login";
-        }else{
-            model.addAttribute("fullname", u.getFullname());
-            model.addAttribute("role", u.getRole());
-            if(model.getAttribute("role") == "admin"){
-                return "manage";
-            }else{
-                return "news";
-            }
+        } else {
+            session.setAttribute("loggedUser", authUser);
+            return "redirect:/news";
         }
+    }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        session.invalidate();
+        ;
+        return "redirect:/login";
     }
 }

@@ -17,11 +17,11 @@
         </head>
         <body>
             
-            <div>
+            <div class="container mt-5 card">
                 <h1>LOGIN PAGE</h1>
-                <div class="login-card">
-                    <form action="checkLogin" method="POST">
-                        <div class="container md-7">
+                <div>
+                    <form action="/auth/checkLogin" method="POST">
+                        <div class="container mt-5">
                             Username: <input type="text" name="username" placeholder="Enter username..."/>
                             Password: <input type="password" name="password" placeholder="Enter password"/>
                             <input type="submit" value="Submit"/>

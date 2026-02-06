@@ -1,0 +1,37 @@
+package racing.fia.f1_news.interceptor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.HandlerInterceptor;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import racing.fia.f1_news.model.User;
+
+@Component
+public class AdminInterceptor implements HandlerInterceptor {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Override
+    public boolean preHandle(
+            HttpServletRequest request,
+            HttpServletResponse response,
+            Object handle) throws Exception {
+
+        HttpSession session = request.getSession();
+
+        User admin = (User) session.getAttribute("loggedUser");
+
+        if (admin == null) {
+            System.out.println("admin is null");
+            return false;
+        } else if (admin.getRole().equals("admin")) {
+            return true;
+        }
+
+        return false;
+    }
+}

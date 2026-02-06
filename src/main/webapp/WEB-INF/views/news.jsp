@@ -18,7 +18,7 @@
     <body>
         <div class="container mt-5">
             <br>
-            <form action="searchNews" method="POST">
+            <form action="/news/search" method="POST">
                 <div class="search-bar">
                     <h2>Search:</h2>
                     <input type="text" name="searchInput" placeholder="Enter keywords..."/>    
