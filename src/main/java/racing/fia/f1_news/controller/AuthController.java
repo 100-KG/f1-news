@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jakarta.servlet.http.HttpSession;
 import racing.fia.f1_news.model.User;
-import racing.fia.f1_news.model.service.UserService;
+import racing.fia.f1_news.service.UserService;
 
 /**
  *
@@ -22,7 +22,11 @@ import racing.fia.f1_news.model.service.UserService;
 @Controller
 public class AuthController {
     @Autowired
-    UserService service;
+    private final UserService service;
+
+    public AuthController(UserService service){
+        this.service = service;
+    }
 
     @GetMapping("/login")
     public String showLoginPage() {

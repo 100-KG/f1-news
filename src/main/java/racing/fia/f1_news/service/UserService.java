@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package racing.fia.f1_news.model.service;
+package racing.fia.f1_news.service;
 
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import racing.fia.f1_news.model.User;
-import racing.fia.f1_news.model.repository.UserRepository;
+import racing.fia.f1_news.repository.UserRepository;
 
 /**
  *

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import racing.fia.f1_news.model.News;
 import racing.fia.f1_news.model.User;
-import racing.fia.f1_news.model.service.NewsService;
+import racing.fia.f1_news.service.NewsService;
 
 /**
  *
@@ -27,7 +27,7 @@ public class NewsController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Autowired
-    NewsService service;
+    private NewsService service;
     
     @RequestMapping(value = "/news")
     public String showNewsPage(HttpSession session, Model model){
