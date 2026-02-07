@@ -27,21 +27,21 @@ public class UserService {
     UserRepository repo;
     
     public User checkLogin(User user){
-        logger.info("Starting check login for username: {}", user.getUsername());
+        logger.info("Service: Starting check login for username: {}", user.getUsername());
         User authUser = new User();
         try{
             Optional<User> opu = repo.findByUsernameAndPassword(user.getUsername(), user.getPassword());
             if(opu.isPresent()){
                 authUser = opu.get();
-                logger.info("Welcom back: {}", authUser.getFullname());
+                logger.info("Service: Welcom back: {}", authUser.getFullname());
                 
             }
             else{
-                logger.warn("Invalid username or password!");
+                logger.warn("Service: Invalid username or password!");
                 return null;
             }
         }catch(Exception e){
-            logger.info("Fatal error in checking login: {}", e);
+            logger.info("Service: Fatal error in checking login: {}", e);
             throw e;
         }
         return authUser;

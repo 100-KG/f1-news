@@ -4,9 +4,7 @@
  */
 package racing.fia.f1_news.controller;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +23,8 @@ import racing.fia.f1_news.model.service.NewsService;
  */
 @Controller
 public class NewsController {
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
     
     @Autowired
     NewsService service;
@@ -33,9 +33,11 @@ public class NewsController {
     public String showNewsPage(HttpSession session, Model model){
         User user = (User) session.getAttribute("loggedUser");
 
+        logger.info("Adding model attributes");
         model.addAttribute("fullname", user.getFullname());
         model.addAttribute("role", user.getRole());
 
+        logger.info("Redirecting to news page");
         return "news";
     }
     

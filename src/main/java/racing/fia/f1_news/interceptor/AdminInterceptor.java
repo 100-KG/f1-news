@@ -21,17 +21,20 @@ public class AdminInterceptor implements HandlerInterceptor {
             HttpServletResponse response,
             Object handle) throws Exception {
 
+        logger.info("Interceptor: Checking if loggedUser is admin");
         HttpSession session = request.getSession();
 
         User admin = (User) session.getAttribute("loggedUser");
 
         if (admin == null) {
-            System.out.println("admin is null");
+            logger.error("Interceptor: user is null");
             return false;
         } else if (admin.getRole().equals("admin")) {
+            logger.info("Interceptor: user is admin");
             return true;
         }
 
+        logger.warn("Interceptor: user is not admin");
         return false;
     }
 }
