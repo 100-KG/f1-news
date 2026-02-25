@@ -8,6 +8,9 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import racing.fia.f1_news.model.User;
@@ -19,7 +22,7 @@ import racing.fia.f1_news.repository.UserRepository;
  */
 @Service
 @Transactional
-public class UserService {
+public class UserService implements UserDetailsService{
     
     private Logger logger = LoggerFactory.getLogger(this.getClass());
     
@@ -45,5 +48,19 @@ public class UserService {
             throw e;
         }
         return authUser;
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
+        User user = repo.findByUsername(username);
+
+        if(user == null){
+            throw new UsernameNotFoundException("User not found with username:" + username);
+        }
+
+        return org.springframework.security.core.userdetails.User.withUsername(user.getUsername())
+        .password(user.getPassword())
+        .roles(user.getRole())
+        .build();
     }
 }

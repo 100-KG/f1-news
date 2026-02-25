@@ -11,25 +11,27 @@ import racing.fia.f1_news.interceptor.AuthInterceptor;
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
 
-    @Autowired
-    AuthInterceptor authIn;
+    // @Autowired
+    // AuthInterceptor authIn;
 
-    @Autowired
-    AdminInterceptor adminIn;
+    // @Autowired
+    // AdminInterceptor adminIn;
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(authIn)
-                .addPathPatterns("/**")
-                .excludePathPatterns(
-                        "/",
-                        "/login",
-                        "/auth/**",
-                        "/css/**",
-                        "/js/**",
-                        "/images/**");
+    // @Override
+    // public void addInterceptors(InterceptorRegistry registry) {
+    //     registry.addInterceptor(authIn)
+    //             .addPathPatterns("/**")
+    //             .excludePathPatterns(
+    //                     "/",
+    //                     "/login",
+    //                     "/auth/**",
+    //                     "/css/**",
+    //                     "/js/**",
+    //                     "/images/**");
 
-        registry.addInterceptor(adminIn)
-                .addPathPatterns("/admin/**");
-    }
+    //     registry.addInterceptor(adminIn)
+    //             .addPathPatterns("/admin/**");
+    // }
+
+    
 }

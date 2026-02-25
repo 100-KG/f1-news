@@ -14,7 +14,8 @@ import racing.fia.f1_news.model.User;
 public class AdminInterceptor implements HandlerInterceptor {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
-
+   
+    // preHandle for session authorizarion
     @Override
     public boolean preHandle(
             HttpServletRequest request,
@@ -37,4 +38,22 @@ public class AdminInterceptor implements HandlerInterceptor {
         logger.warn("Interceptor: user is not admin");
         return false;
     }
+
+
+    // @Override
+    // public boolean preHandle(
+    //     HttpServletRequest request,
+    //     HttpServletResponse response,
+    //     Object handle
+    // ) throws Exception{
+    //     // String role = (String) request.getAttribute("role");
+    //     User admin = (User) request.getAttribute("authUser");
+    //     if("admin".equalsIgnoreCase(admin.getRole())){
+    //         logger.info("Inteceptor: user is admin");
+    //         return true;
+    //     }
+    //     logger.info("Interceptor: user is not admin");
+    //     return false;
+    // }
 }
+
