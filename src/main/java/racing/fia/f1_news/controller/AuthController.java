@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,32 +39,39 @@ public class AuthController {
         this.service = service;
     }
 
-    @GetMapping("/login")
-    public String showLoginPage() {
-        return "login";
-    }
+    // @GetMapping("/login")
+    // public String showLoginPage() {
+    //     return "login";
+    // }
 
-    @PostMapping("/auth/checkLogin")
-    public String checkLoginReturnPage(
-            @RequestParam("username") String un,
-            @RequestParam("password") String pw,
-            HttpSession session, Model model) {
+    // @PostMapping("/auth/checkLogin")
+    // public String checkLoginReturnPage(
+    //         @RequestParam("username") String un,
+    //         @RequestParam("password") String pw,
+    //         HttpSession session, Model model) {
 
-        logger.info("Controller: Starting checkLogin function");
-        User user = new User();
-        user.setUsername(un);
-        user.setPassword(pw);
+    //     logger.info("Controller: Starting checkLogin function");
+    //     User user = new User();
+    //     user.setUsername(un);
+    //     user.setPassword(pw);
 
-        User authUser = service.checkLogin(user);
+    //     User authUser = service.checkLogin(user);
 
-        if (authUser == null) {
-            logger.info("Controller: Invalid username or password",
-                    model.addAttribute("error", "Invalid username or password"));
-            return "login";
-        } else {
-            session.setAttribute("loggedUser", authUser);
-            return "redirect:/news";
-        }
+    //     if (authUser == null) {
+    //         logger.info("Controller: Invalid username or password",
+    //                 model.addAttribute("error", "Invalid username or password"));
+    //         return "login";
+    //     } else {
+    //         session.setAttribute("loggedUser", authUser);
+    //         return "redirect:/news";
+    //     }
+    // }
+
+    @PostMapping("/login")
+    public String login(@RequestBody User user){
+        User auth = service.checkLogin(user);
+        logger.info("Welcome back:" + auth.getFullname());
+        return "news";
     }
 
     @GetMapping("/logout")
@@ -71,5 +79,10 @@ public class AuthController {
         session.invalidate();
 
         return "redirect:/login";
+    }
+
+    @PostMapping("/register")
+    public User register(@RequestBody User user){
+        return service.register(user);
     }
 }

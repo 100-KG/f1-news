@@ -16,4 +16,5 @@ HELP.md
 # OS
 .DS_Store
 Thumbs.db
-EOF
+
+src/main/resources/application.properties
